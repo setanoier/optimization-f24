@@ -2,10 +2,11 @@
 
 
 ## Team
-- Sergei Glazov
-- Sergey Razmakhov
-- Timofei Mashenkov
+- Sergei Glazov - CEO
+- Sergey Razmakhov - Leader
+- Timofei Mashenkov - Kalina 2 Owner
 
+## Language 
 Choosen language: Go
 
 ## Tasks
