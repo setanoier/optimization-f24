@@ -21,11 +21,10 @@ func main() {
 	var isMax bool
 
 	inou.ObjectiveCoefficientsInput(n, &C)
-	inou.ConstraitMatrixInput(n, m, &A)
+	inou.ConstraintMatrixInput(n, m, &A)
 	inou.ValuesVectorInput(m, &b)
 	inou.AccuracyInput(&eps)
 	inou.IsMaximizationInput(&isMax)
-
 	inou.RenderProblem(isMax, n, C, A, b)
 
 	state, x, z := smp.Simplex(C, A, b, eps, isMax)

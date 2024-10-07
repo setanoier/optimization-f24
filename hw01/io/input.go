@@ -12,7 +12,7 @@ func ObjectiveCoefficientsInput(n int, C *[]float64) {
 	}
 }
 
-func ConstraitMatrixInput(n, m int, A *[][]float64) {
+func ConstraintMatrixInput(n, m int, A *[][]float64) {
 	fmt.Println("Enter the constraint matrix (A) row by row:")
 	for i := range m {
 		(*A)[i] = make([]float64, n)
