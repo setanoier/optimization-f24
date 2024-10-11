@@ -67,7 +67,7 @@ func Simplex(C []float64, A [][]float64, b []float64, eps float64, isMax bool) (
 		}
 
 		if pivotRow == -1 {
-			return "unbounded", nil, 0
+			return "the method is not applicable", nil, 0
 		}
 
 		// Step 3.4: Perform the pivot operation

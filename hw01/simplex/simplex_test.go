@@ -123,7 +123,7 @@ func TestUnboundedFirst(t *testing.T) {
 	eps, isMax := 0.01, true
 
 	actualState, _, _ := smp.Simplex(C, A, b, eps, isMax)
-	expectedState := "unbounded"
+	expectedState := "the method is not applicable"
 
 	if actualState != expectedState {
 		t.Errorf("expected state %v, got %v", expectedState, actualState)

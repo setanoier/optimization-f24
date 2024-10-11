@@ -39,7 +39,7 @@ func AccuracyInput(eps *float64) {
 
 func IsMaximizationInput(isMax *bool) {
 	var isMaximization string
-	fmt.Print("Is this a maximazation problem? (yes/no): ")
+	fmt.Print("Is this a maximization problem? (yes/no): ")
 	fmt.Scan(&isMaximization)
 	*isMax = isMaximization == "yes"
 }
