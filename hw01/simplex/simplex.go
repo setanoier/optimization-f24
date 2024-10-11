@@ -34,7 +34,7 @@ func Simplex(C []float64, A [][]float64, b []float64, eps float64, isMax bool) (
 		// Step 3.1: Identify the entering variable (most negative coefficient in the objective row)
 		pivotCol := -1
 		minVal := 0.0
-		for j := 0; j < n+m; j++ { // Now correctly looping through n+m columns
+		for j := 0; j < n+m; j++ {
 			if tableau[0][j] < minVal {
 				minVal = tableau[0][j]
 				pivotCol = j
