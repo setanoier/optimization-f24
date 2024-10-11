@@ -8,6 +8,6 @@
     └── simplex
 ```
 
-`/cmd` - nothing but program startup
-`/io` - input/output functions
-`/simplex` - actual simplex method and tests along
+- `/cmd` - nothing but program startup 
+- `/io` - input/output functions 
+- `/simplex` - actual simplex method and tests along
