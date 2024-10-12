@@ -1,6 +1,7 @@
 package simplex_test
 
 import (
+	"math"
 	"reflect"
 	"testing"
 
@@ -127,5 +128,37 @@ func TestUnboundedFirst(t *testing.T) {
 
 	if actualState != expectedState {
 		t.Errorf("expected state %v, got %v", expectedState, actualState)
+	}
+}
+
+func TestSimplex_Minimization_Custom(t *testing.T) {
+	C := []float64{-3, 4, -5}
+	A := [][]float64{
+		{4, 3, 1},
+		{2, 5, -2},
+		{1, -1, 3},
+	}
+	b := []float64{15, 20, 10}
+	eps := 0.01
+	isMax := false
+
+	result, x, objValue := smp.Simplex(C, A, b, eps, isMax)
+
+	expectedResult := "solved"
+	expectedX := []float64{3.18, 0, 2.27}
+	expectedObjValue := -20.91
+
+	if result != expectedResult {
+		t.Errorf("Expected result %s, but got %s", expectedResult, result)
+	}
+
+	for i := range expectedX {
+		if math.Abs(x[i]-expectedX[i]) > eps {
+			t.Errorf("Expected x[%d] to be %.2f, but got %.2f", i, expectedX[i], x[i])
+		}
+	}
+
+	if math.Abs(objValue-expectedObjValue) > eps {
+		t.Errorf("Expected objective value %.2f, but got %.2f", expectedObjValue, objValue)
 	}
 }
