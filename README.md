@@ -6,8 +6,6 @@
 - Sergey Razmakhov - Leader
 - Timofei Mashenkov - Kalina 2 Owner
 
-## Language 
-Choosen language: Go
-
 ## Tasks
 1. Simplex Method
+2. Interior-point Algorithm
