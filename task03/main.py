@@ -195,18 +195,18 @@ def russel_approximation_method(table: TransportationTable) -> int:
 
 
 def main():
-    first_table = TransportationTable(3, 5)
-    first_table.supplies = np.array([140, 180, 160])
-    first_table.demands = np.array([60, 70, 120, 130, 100])
+    first_table = TransportationTable(3, 4)
+    first_table.supplies = np.array([160, 140, 170])
+    first_table.demands = np.array([120, 50, 190, 110])
 
-    first_table.costs = np.array([[2, 3, 4, 2, 4],
-                                  [8, 4, 1, 4, 1],
-                                  [9, 7, 3, 7, 2]])
+    first_table.costs = np.array([[7, 8, 1, 2],
+                                  [4, 5, 9, 8],
+                                  [9, 2, 3, 6]])
 
     print("First table")
-    print("-----------------------------")
+    print("-------------------------")
     first_table.print_table()
-    print("\n-----------------------------")
+    print("\n-------------------------")
     print("Northwest Corner Method:", north_west_corner_method(first_table))
 
     second_table = TransportationTable(3, 4)
@@ -221,12 +221,24 @@ def main():
     print("-------------------------")
     second_table.print_table()
     print("\n-------------------------")
-    print("Northwest Corner Method:", north_west_corner_method(second_table))
     print("Vogel's Approximation Method:",
           vogel_approximation_method(second_table))
-    print("Russell's Approximation Method:",
-          russel_approximation_method(second_table))
 
+
+    third_table = TransportationTable(3, 4)
+    third_table.supplies = np.array([160, 140, 170])
+    third_table.demands = np.array([120, 50, 190, 110])
+
+    third_table.costs = np.array([[7, 8, 1, 2],
+                                  [4, 5, 9, 8],
+                                  [9, 2, 3, 6]])
+
+    print("\nThird table")
+    print("-------------------------")
+    third_table.print_table()
+    print("\n-------------------------")
+    print("Rusell's Approximation Method:",
+          russel_approximation_method(third_table))
 
 if __name__ == '__main__':
     main()
