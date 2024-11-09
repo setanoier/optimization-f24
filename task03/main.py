@@ -1,11 +1,13 @@
 import numpy as np
 import random
 
+
 class TransportationTable:
     def __init__(self, sources_number: int = 3, destinations_number: int = 4):
         self.destinations_number: int = destinations_number
         self.sources_number: int = sources_number
-        self.supplies = np.array([random.randint(1, 50) for _ in range(sources_number)])
+        self.supplies = np.array([random.randint(1, 50)
+                                 for _ in range(sources_number)])
         self.demands = self.generate_demands()
         self.costs = self.generate_costs()
 
@@ -15,34 +17,39 @@ class TransportationTable:
         demands = np.zeros(self.destinations_number, dtype=int)
 
         demands[0] = random.randint(1, supplies_sum // 2)
-        demands[1]: int = random.randint(1 if sum(demands) != supplies_sum else 0, supplies_sum - sum(demands))
-        demands[2]: int = random.randint(1 if sum(demands) != supplies_sum else 0, supplies_sum - sum(demands))
+        demands[1]: int = random.randint(
+            1 if sum(demands) != supplies_sum else 0, supplies_sum - sum(demands))
+        demands[2]: int = random.randint(
+            1 if sum(demands) != supplies_sum else 0, supplies_sum - sum(demands))
         demands[3]: int = supplies_sum - sum(demands)
 
         return demands
 
-
     def generate_costs(self):
-        costs = np.random.randint(1, 600, size=(self.sources_number, self.destinations_number))
+        costs = np.random.randint(1, 600, size=(
+            self.sources_number, self.destinations_number))
 
         return costs
 
     def print_table(self):
         for i in range(self.sources_number):
             for j in range(self.destinations_number):
-                print(self.costs[i][j], end=" ")
-            print(self.supplies[i])
+                print(f'{self.costs[i][j]: 4}', end=" ")
+            print(f'{self.supplies[i]: 4}')
 
         for i in range(self.destinations_number):
-            print(self.demands[i], end=" ")
+            print(f'{self.demands[i]: 4}', end=" ")
+
 
 def set_zeros_horizontally(row: int, table: TransportationTable):
     for j in range(table.destinations_number):
         table.costs[row][j] = 0
 
+
 def set_zeros_vertically(column: int, table: TransportationTable):
     for i in range(table.sources_number):
         table.costs[i][column] = 0
+
 
 def north_west_corner_method(table: TransportationTable) -> int:
     answer: int = 0
@@ -121,7 +128,8 @@ def vogel_approximation_method(table: TransportationTable) -> int:
             supply_index = np.where(table.supplies > 0)[0][0]
             demand_index = np.where(table.demands > 0)[0][0]
             if table.supplies[supply_index] == table.demands[demand_index]:
-                answer += table.supplies[supply_index] * table.costs[supply_index, demand_index]
+                answer += table.supplies[supply_index] * \
+                    table.costs[supply_index, demand_index]
                 break
 
     return answer
@@ -139,15 +147,19 @@ def russel_approximation_method(table: TransportationTable) -> int:
         for i in valid_row_indexes:
             for j in valid_column_indexes:
                 if table.costs[i][j] != 1e9:
-                    max_column_value = np.max(table.costs[table.costs[:, j] != 1e9, j])
-                    max_row_value = np.max(table.costs[i, table.costs[i, :] != 1e9])
-                    temp_table[i][j] = table.costs[i, j] - max_column_value - max_row_value
+                    max_column_value = np.max(
+                        table.costs[table.costs[:, j] != 1e9, j])
+                    max_row_value = np.max(
+                        table.costs[i, table.costs[i, :] != 1e9])
+                    temp_table[i][j] = table.costs[i, j] - \
+                        max_column_value - max_row_value
 
         max_negative_value = 1e9
         for i in valid_row_indexes:
             for j in valid_column_indexes:
                 if table.costs[i][j] != 1e9:
-                    max_negative_value = min(max_negative_value, temp_table[i, j])
+                    max_negative_value = min(
+                        max_negative_value, temp_table[i, j])
 
         min_negative_indexes = []
         for i in valid_row_indexes:
@@ -175,22 +187,45 @@ def russel_approximation_method(table: TransportationTable) -> int:
             supply_index = np.where(table.supplies > 0)[0][0]
             demand_index = np.where(table.demands > 0)[0][0]
             if table.supplies[supply_index] == table.demands[demand_index]:
-                answer += table.supplies[supply_index] * table.costs[supply_index, demand_index]
+                answer += table.supplies[supply_index] * \
+                    table.costs[supply_index, demand_index]
                 break
 
     return answer
 
 
 def main():
-    transportation_table = TransportationTable()
+    first_table = TransportationTable(3, 5)
+    first_table.supplies = np.array([140, 180, 160])
+    first_table.demands = np.array([60, 70, 120, 130, 100])
 
-    print("TABLE")
-    transportation_table.print_table()
+    first_table.costs = np.array([[2, 3, 4, 2, 4],
+                                  [8, 4, 1, 4, 1],
+                                  [9, 7, 3, 7, 2]])
 
-    print()
+    print("First table")
+    print("-----------------------------")
+    first_table.print_table()
+    print("\n-----------------------------")
+    print("Northwest Corner Method:", north_west_corner_method(first_table))
 
-    print("ANSWER")
-    print(russel_approximation_method(transportation_table))
+    second_table = TransportationTable(3, 4)
+    second_table.supplies = np.array([160, 140, 170])
+    second_table.demands = np.array([120, 50, 190, 110])
+
+    second_table.costs = np.array([[7, 8, 1, 2],
+                                  [4, 5, 9, 8],
+                                  [9, 2, 3, 6]])
+
+    print("\nSecond table")
+    print("-------------------------")
+    second_table.print_table()
+    print("\n-------------------------")
+    print("Northwest Corner Method:", north_west_corner_method(second_table))
+    print("Vogel's Approximation Method:",
+          vogel_approximation_method(second_table))
+    print("Russell's Approximation Method:",
+          russel_approximation_method(second_table))
 
 
 if __name__ == '__main__':
