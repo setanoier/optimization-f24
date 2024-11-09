@@ -284,7 +284,7 @@ def main():
     fourth_table.print_table()
     print("\n-------------------------")
     print("Northwest Corner Method:", north_west_corner_method(fourth_table))
-   fourth_table.supplies = np.array([120, 100, 130])  # Balanced total supply
+    fourth_table.supplies = np.array([120, 100, 130])  # Balanced total supply
     fourth_table.demands = np.array([90, 60, 110, 90])  # Balanced total demand
 
     fourth_table.costs = np.array([[3, 7, 9, 4],
@@ -298,11 +298,6 @@ def main():
                                    [8, 5, 6, 2],
                                    [4, 3, 5, 7]])
     print("Russell's Approximation Method:", russel_approximation_method(fourth_table))
-
-if __name__ == '__main__':
-    main()
-
-
 
 if __name__ == '__main__':
     main()
